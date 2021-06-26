@@ -23,6 +23,8 @@ class User(db.Model):
 
     last_name = db.Column(db.String(30), nullable=False)
 
+    feedback = db.relationship("Feedback", backref="user", cascade="all, delete")
+
     @classmethod
     def register(cls, username, password, email, first_name, last_name):
         """Register user w/ hashed password & return user."""
@@ -55,4 +57,4 @@ class Feedback(db.Model):
 
     content = db.Column(db.Text, nullable=False)
 
-    username = db.Column(db.Text, db.ForeignKey('users.username'))
+    username = db.Column(db.Text, db.ForeignKey('users.username'), nullable=False)

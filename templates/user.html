@@ -1,8 +1,8 @@
 {% extends 'base.html' %}{% block title %}User Info{% endblock %}{% block content %}
 
-<h1 class="display-2">User Profile</h1>
-
 <div class="container">
+	<h2 class="display-2">User Profile</h2>
+
 	<div class="container">
 		<p><b>Username:</b> {{user.username}}</p>
 	</div>
@@ -11,6 +11,34 @@
 	</div>
 	<div class="container">
 		<p><b>Name:</b> {{user.first_name}} {{user.last_name}}</p>
+	</div>
+	<div class="container">
+		<form action="/users/{{user.username}}/delete">
+			<button class="btn btn-sm btn-outline-danger">Delete Account</button>
+		</form>
+	</div>
+</div>
+
+<hr />
+
+<div class="container">
+	<h2 class="display-2">User Feedback</h2>
+	<div class="container">
+		<a href="/users/{{user.username}}/feedback/add" class="btn btn-primary">Add Feedback</a>
+	</div>
+	<div class="container">
+		<ul>
+			{% for f in feedback %}{% if f.username == user.username %}
+			<li>
+				<form action="/feedback/{{f.id}}/delete" method="POST">
+					<a href="/feedback/{{f.id}}/update" class="display-6">{{f.title}}</a>
+
+					<button class="btn btn-sm btn-danger">Delete</button>
+				</form>
+				<p>{{f.content}}</p>
+			</li>
+			{% endif %}{% endfor %}
+		</ul>
 	</div>
 </div>
 {% endblock %}

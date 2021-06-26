@@ -1,9 +1,9 @@
-{% extends 'base.html' %}{% block title %}Register{% endblock %}{% block content %}
+{% extends 'base.html' %}{% block title %}Feedback{% endblock %}{% block content %}
 
-<h1 class="display-2">Register</h1>
+<h1 class="display-2">Add Feedback</h1>
 
 <div class="container">
-	<form action="/register" method="POST">
+	<form action="/users/{{user.username}}/feedback/add" method="POST">
 		{{ form.hidden_tag() }} {% for field in form if field.widget.input_type != 'hidden'%}
 		<div class="form-group">
 			{{field.label}} {{field(class_="form-control")}} {% for err in field.errors %}
@@ -11,10 +11,7 @@
 			{% endfor %}
 		</div>
 		{% endfor %}
-		<button class="btn btn-success btn-lg">Register</button>
+		<button class="btn btn-success btn-lg">Add</button>
 	</form>
-	<div class="py-2">
-		<a href="/login">Already a user? Login here</a>
-	</div>
 </div>
 {% endblock %}

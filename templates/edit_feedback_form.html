@@ -1,0 +1,25 @@
+{% extends 'base.html' %}{% block title %}Update Feedback{% endblock %}{% block content %}
+
+<h1 class="display-2">Update Feedback</h1>
+
+<div class="container">
+	<form action="/feedback/{{feedback.id}}/update" method="POST">
+		{{ form.hidden_tag() }}
+		<div class="form-group">
+			<label for="title">{{form.title.label}}</label>
+			<input type="text" name="title" id="title" class="form-control" value="{{feedback.title}}" />
+			{% for err in form.errors %}
+			<small class="form-text text-danger"> {{err}} </small>
+			{% endfor %}
+		</div>
+		<div class="form-group">
+			<label for="content">{{form.content.label}}</label>
+			<input type="text" name="content" id="content" class="form-control" value="{{feedback.content}}" />
+			{% for err in form.errors %}
+			<small class="form-text text-danger"> {{err}} </small>
+			{% endfor %}
+		</div>
+		<button class="btn btn-success btn-lg">Save</button>
+	</form>
+</div>
+{% endblock %}
